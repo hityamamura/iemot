@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本伝家元連合会 | 公式ホームページ</title>
+    
+    <!-- Google Fonts: Noto Serif JP for Japanese, Cormorant Garamond for English -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (via CDN for single file) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sumi: '#050505',      // ほぼ漆黒、完全な墨色
+                        wasahi: '#FDFCF8',    // 和紙のような生成り
+                        matsuba: '#263A29',   // 非常に濃い、重厚な松葉色
+                        darkgreen: '#141F16', // 黒に近い深緑
+                        kinari: '#E8E6DC',    // 鈍いベージュ
+                    },
+                    fontFamily: {
+                        serif: ['"Noto Serif JP"', 'serif'],
+                        english: ['"Cormorant Garamond"', 'serif'],
+                    },
+                    letterSpacing: {
+                        widest: '.25em',
+                        superwide: '.5em',
+                    },
+                    backgroundImage: {
+                        'washi': "url('https://www.transparenttextures.com/patterns/rice-paper-2.png')", 
+                    },
+                    fontSize: {
+                        'xs': ['0.9rem', { lineHeight: '1.4rem' }],
+                        'sm': ['1.05rem', { lineHeight: '1.8rem' }],
+                        'base': ['1.2rem', { lineHeight: '2.1rem' }],
+                        'lg': ['1.35rem', { lineHeight: '2.25rem' }],
+                        'xl': ['1.5rem', { lineHeight: '2.4rem' }],
+                        '2xl': ['1.85rem', { lineHeight: '2.6rem' }],
+                        '3xl': ['2.2rem', { lineHeight: '2.8rem' }],
+                        '4xl': ['2.8rem', { lineHeight: '1' }],
+                        '5xl': ['3.5rem', { lineHeight: '1.1' }],
+                        '6xl': ['4.5rem', { lineHeight: '1.1' }],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base styles */
+        body {
+            font-feature-settings: "palt";
+            -webkit-font-smoothing: antialiased;
+            background-color: #FDFCF8;
+            color: #050505;
+        }
+        
+        /* Vertical writing utility */
+        .vertical-rl {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Fade in animation classes */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        }
+        
+        .fade-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading overlay */
+        #loading {
+            position: fixed;
+            inset: 0;
+            background-color: #FDFCF8;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.2s ease-out, visibility 1.2s;
+        }
+        
+        .loading-logo {
+            opacity: 0;
+            animation: fadeInOut 2.5s ease-in-out forwards;
+        }
+        
+        .force-single-line-vertical {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            white-space: nowrap;
+            height: auto;
+            max-height: 80vh;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.05); }
+        }
+
+        /* Custom selection color */
+        ::selection {
+            background: #263A29;
+            color: #FDFCF8;
+        }
+        
+        .force-nowrap {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body class="font-serif bg-wasahi text-sumi relative">
+
+    <!-- Loading Screen -->
+    <div id="loading">
+        <div class="loading-logo font-serif text-2xl tracking-widest text-sumi font-medium force-single-line-vertical">
+            日本伝家元連合会
+        </div>
+    </div>
+
+    <!-- Navigation (Minimalist) -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-8 px-6 md:px-12 flex justify-between items-start mix-blend-multiply pointer-events-none">
+        <div class="logo font-serif text-lg tracking-widest vertical-rl h-auto pointer-events-auto font-bold text-sumi force-nowrap opacity-0 md:opacity-100">
+            <!-- PC用ナビゲーションロゴ -->
+            日本伝家元連合会
+        </div>
+        <div class="pointer-events-auto cursor-pointer group">
+            <div class="w-10 h-[2px] bg-sumi mb-2 transition-all group-hover:w-14"></div>
+            <div class="w-6 h-[2px] bg-sumi ml-auto transition-all group-hover:w-14"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (完全維持) -->
+    <header class="relative w-full h-screen overflow-hidden">
+        <!-- Background Image with Overlay (維持: 巨大なしめ縄のある古社) -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1576489922094-2cfe89fb1733?q=80&w=2600&auto=format&fit=crop" 
+                alt="Ancient Japanese wooden shrine with massive shimenawa rope" 
+                class="w-full h-full object-cover opacity-80 grayscale contrast-[1.1] brightness-105"
+            >
+            <div class="absolute inset-0 bg-wasahi/20 mix-blend-overlay"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-wasahi/10 to-wasahi"></div>
+        </div>
+
+        <!-- Hero Content Container (維持: 文字サイズとレイアウト) -->
+        <div class="absolute inset-0 z-10 w-full h-full fade-element visible delay-500">
+            
+            <!-- 1. キャッチコピー：画面中央やや右寄りに配置 -->
+            <div class="absolute top-1/2 right-[8%] md:right-[15%] transform -translate-y-1/2 flex flex-row-reverse gap-6 md:gap-12 items-start h-auto max-h-[80vh]">
+                <!-- Line 1 (Rightmost) -->
+                <h1 class="vertical-rl text-2xl md:text-4xl font-bold tracking-superwide leading-none force-nowrap text-sumi drop-shadow-sm pt-0">
+                    文化を継ぎ、
+                </h1>
+                <!-- Line 2 (Center) -->
+                <h1 class="vertical-rl text-2xl md:text-4xl font-bold tracking-superwide leading-none force-nowrap text-sumi drop-shadow-sm pt-8 md:pt-16">
+                    志を立て、
+                </h1>
+                <!-- Line 3 (Leftmost within group) -->
+                <h1 class="vertical-rl text-2xl md:text-4xl font-bold tracking-superwide leading-none force-nowrap text-sumi drop-shadow-sm pt-16 md:pt-32">
+                    未来へ手渡す。
+                </h1>
+            </div>
+
+            <!-- 2. 団体名：画面左端に配置 -->
+            <div class="absolute top-1/2 left-[5%] md:left-[8%] transform -translate-y-1/2 h-[50vh] flex items-center">
+                <h2 class="vertical-rl text-xl md:text-2xl font-medium tracking-widest leading-none force-nowrap text-sumi/90 drop-shadow-sm border-t border-sumi/20 pt-6">
+                    日本伝家元連合会
+                </h2>
+            </div>
+
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 opacity-80 fade-element visible delay-1000">
+            <span class="font-english text-xs tracking-widest uppercase text-sumi font-bold">Scroll</span>
+            <div class="w-[2px] h-12 bg-sumi"></div>
+        </div>
+    </header>
+
+    <!-- Section 2: About (Declaration) -->
+    <section class="py-32 md:py-48 px-6 md:px-24 bg-wasahi relative">
+        <div class="max-w-5xl mx-auto text-center fade-element">
+            <span class="font-english text-matsuba text-lg tracking-widest block mb-10 font-bold">Statement</span>
+            <h2 class="text-3xl md:text-4xl font-medium mb-20 tracking-widest text-sumi">日本伝家元連合会とは</h2>
+            
+            <div class="leading-[2.8] md:leading-[3.5] tracking-widest text-xl font-medium text-sumi space-y-12">
+                <p>
+                    時は流れ、形は変われど、<br>
+                    変わらぬものが、底流にはある。
+                </p>
+                <p>
+                    私たちは、日本の伝統・文化・精神を<br>
+                    ただ守るのではなく、現代に正しく継承し、<br>
+                    次代へと手渡すための連合体です。
+                </p>
+                <p>
+                    技を教えるだけの教室ではなく、<br>
+                    道を極め、人を導く「家元」としての在り方。<br>
+                    その深化を支え、共に歩みます。
+                </p>
+                <p class="pt-10 text-matsuba font-bold text-2xl">
+                    ここに在るのは、静謐なる覚悟です。
+                </p>
+            </div>
+        </div>
+        <div class="absolute top-1/2 left-10 w-32 h-32 border-2 border-sumi/10 rounded-full pointer-events-none"></div>
+    </section>
+
+    <!-- Middle Image Section (Standalone) -->
+    <section class="h-[70vh] relative overflow-hidden fade-element">
+        <!-- 熊野古道の苔むした石畳 (新規差し替え) -->
+        <img 
+            src="https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2682&auto=format&fit=crop" 
+            alt="Mystical ancient forest path, heavily moss-covered stone steps, giant cedar trees" 
+            class="w-full h-full object-cover grayscale contrast-[1.1] brightness-105"
+        >
+        <div class="absolute inset-0 bg-sumi/10 mix-blend-overlay"></div>
+    </section>
+
+    <!-- Section 3: Three Pillars -->
+    <section class="py-24 md:py-32 bg-sumi text-wasahi relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/black-linen.png')]"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-baseline border-b border-wasahi/20 pb-8 mb-24 fade-element">
+                <h2 class="text-2xl md:text-3xl font-medium tracking-widest">活動の三本柱</h2>
+                <span class="font-english text-base tracking-widest opacity-80 mt-4 md:mt-0 font-medium">Core Activities</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-20 md:gap-10">
+                <!-- Pillar 1 -->
+                <div class="group fade-element">
+                    <div class="border-l-2 border-wasahi/20 pl-8 h-full transition-all duration-700 group-hover:border-matsuba group-hover:pl-10">
+                        <span class="font-english text-5xl font-light text-matsuba block mb-8">01</span>
+                        <h3 class="text-xl md:text-2xl tracking-widest mb-6 font-bold">伝統・文化・精神の<br>正統なる継承</h3>
+                        <p class="text-base font-light leading-loose opacity-90 text-justify">
+                            形骸化しやすい伝統を、その精神性と共に現代へ。
+                            表面的な技術伝達に留まらず、その根底にある美意識や哲学を次世代へ繋ぎます。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="group fade-element" style="transition-delay: 100ms;">
+                    <div class="border-l-2 border-wasahi/20 pl-8 h-full transition-all duration-700 group-hover:border-matsuba group-hover:pl-10">
+                        <span class="font-english text-5xl font-light text-matsuba block mb-8">02</span>
+                        <h3 class="text-xl md:text-2xl tracking-widest mb-6 font-bold">家元としての<br>活動深化支援</h3>
+                        <p class="text-base font-light leading-loose opacity-90 text-justify">
+                            既に家元として立つ方、またそれを志す方が、
+                            その役割を全うするための精神的支柱となり、
+                            より深い領域への到達を支援します。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="group fade-element" style="transition-delay: 200ms;">
+                    <div class="border-l-2 border-wasahi/20 pl-8 h-full transition-all duration-700 group-hover:border-matsuba group-hover:pl-10">
+                        <span class="font-english text-5xl font-light text-matsuba block mb-8">03</span>
+                        <h3 class="text-xl md:text-2xl tracking-widest mb-6 font-bold">日本伝家元制度による<br>体制構築</h3>
+                        <p class="text-base font-light leading-loose opacity-90 text-justify">
+                            組織の拡大のみを目的としない、
+                            信頼と格調ある流派運営のための独自の制度設計と、
+                            持続可能な体制づくりを支えます。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: The System (Philosophy) -->
+    <section class="py-32 md:py-48 bg-wasahi relative">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16 md:gap-32">
+                
+                <!-- Image/Atmosphere (画像差し替え完了: 英語の本 → 苔むした石段と森) -->
+                <div class="w-full md:w-1/2 h-[50vh] relative fade-element">
+                    <div class="absolute top-0 left-0 w-full h-full bg-sumi/5 transform translate-x-4 translate-y-4"></div>
+                     <img 
+                        src="https://images.unsplash.com/photo-1596323604368-466d71b3e7c8?q=80&w=2574&auto=format&fit=crop" 
+                        alt="Ancient moss-covered stone steps in a deep misty forest" 
+                        class="w-full h-full object-cover grayscale opacity-90 contrast-[1.05]"
+                    >
+                </div>
+
+                <!-- Content -->
+                <div class="w-full md:w-1/2 fade-element">
+                    <span class="font-english text-matsuba text-lg tracking-widest block mb-8 font-bold">Philosophy</span>
+                    <h2 class="text-3xl md:text-4xl font-medium tracking-widest mb-12 text-sumi">日本伝家元制度とは</h2>
+                    
+                    <div class="prose prose-lg font-serif">
+                        <p class="leading-loose tracking-wide text-sumi mb-10 font-medium">
+                            それは、単なるビジネスモデルの提供ではありません。<br>
+                            「仕組み」を売るものでも、ノウハウの量産でもありません。
+                        </p>
+                        <p class="leading-loose tracking-wide text-sumi mb-10 font-medium">
+                            私たちが大切にするのは、<br>
+                            <span class="border-b-2 border-matsuba/40 pb-1 font-bold">在り方、基準、そして美意識の継承</span>です。
+                        </p>
+                        <p class="leading-loose tracking-wide text-sumi font-medium">
+                            本物であること。<br>
+                            その静かなる誇りが、人々の信頼となり、<br>
+                            百年先へと続く流派の礎となると信じています。
+                        </p>
+                    </div>
+                    
+                    <div class="mt-20">
+                        <a href="#contact" class="group inline-block">
+                            <span class="text-base tracking-widest border-b-2 border-sumi pb-2 group-hover:text-matsuba group-hover:border-matsuba transition-colors duration-500 font-bold">
+                                制度について問い合わせる
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Chairman's Message & Profile -->
+    <section class="py-32 bg-[#F5F4EF] relative">
+        <div class="absolute top-0 left-1/2 w-[2px] h-32 bg-sumi/10 -translate-x-1/2"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 text-center fade-element">
+            <div class="mb-20">
+                <span class="text-6xl text-sumi/10 font-serif">❝</span>
+            </div>
+            
+            <div class="text-xl md:text-2xl leading-[2.5] tracking-widest font-medium text-sumi mb-24">
+                導くのではありません。<br>
+                ただ、場を整えるのです。<br>
+                <br>
+                水が低きに流れるように、<br>
+                本物の精神は、<br>
+                整えられた器にこそ静かに満ちていく。<br>
+                <br>
+                私たちはその器を磨き続け、<br>
+                次代の家元たちが立つ<br>
+                揺るぎない大地でありたいと思います。
+            </div>
+
+            <!-- Profile Block -->
+            <div class="mt-24 text-left border-t border-sumi/20 pt-20 relative">
+                <!-- Name & Title -->
+                <div class="text-center mb-16">
+                    <p class="text-base tracking-widest text-matsuba mb-4 font-bold">日本伝家元連合会 会長</p>
+                    <p class="text-4xl md:text-5xl tracking-widest font-medium text-sumi mb-3">山村 和也</p>
+                    <p class="font-english text-lg tracking-widest opacity-60 uppercase font-medium">Yamamura Kazuya</p>
+                    <p class="text-lg tracking-wide opacity-80 mt-6 font-bold">教育事業家</p>
+                </div>
+
+                <!-- Biography Detail -->
+                <div class="grid grid-cols-1 lg:grid-cols-[1.5fr,1fr] gap-16 items-start text-sumi">
+                    <!-- Bio Text -->
+                    <div class="space-y-8 text-justify leading-loose tracking-wide text-lg font-medium opacity-90">
+                        <p>
+                            大学1回生の時に家庭教師派遣事業で起業。教員免許取得後、塾講師から教室長、部長を経て独立を果たす。
+                            教育の現場で培った経験に加え、22年に及ぶコーチング、選択理論心理学、NLP（神経言語プログラミング）の研鑽を融合。
+                        </p>
+                        <p>
+                            また、日本武道歴34年、指導歴30年という「道」を探求する家元・流派代表師範としての知見を統合し、独自の「日本伝シンプルコーチング」を確立する。
+                        </p>
+                        <p>
+                            これまでに学校、大学、教育委員会、大手塾、個人塾でのセミナー、講演会、講義を多数実施。その中で教育関係を中心に多くの事業相談をお受けしたり、事業化のご支援も多数。
+                            幼年から企業経営者まで、総計5000名の前進に寄り添ってきた。
+                        </p>
+                    </div>
+                    
+                    <!-- Current Activity List -->
+                    <div class="bg-white/50 p-10 border border-sumi/10 shadow-sm relative overflow-hidden">
+                        <!-- 装飾的な背景 -->
+                        <div class="absolute top-0 right-0 w-20 h-20 bg-matsuba/5 rounded-bl-full"></div>
+                        
+                        <p class="font-bold text-sumi mb-8 tracking-widest text-xl border-b-2 border-sumi/10 pb-2 inline-block">現在</p>
+                        <ul class="space-y-5 text-base font-medium list-none text-sumi/90">
+                            <li class="pl-4 border-l-4 border-matsuba/20">
+                                (一社)次世代設計研究所 理事長<br>
+                                <span class="opacity-70 text-sm">（まちづくり/コンサル/顧問/講演会等）</span>
+                            </li>
+                            <li class="pl-4 border-l-4 border-matsuba/20">
+                                日本伝シンプルコーチングアカデミー<br>代表トレーナー/プロコーチ
+                            </li>
+                            <li class="pl-4 border-l-4 border-matsuba/20">
+                                NPO法人全日本合気拳法連盟 会長・師範
+                            </li>
+                            <li class="pl-4 border-l-4 border-matsuba/20">
+                                ヒット進学ゼミ、研究型教室 塾長
+                            </li>
+                            <li class="pl-4 border-l-4 border-matsuba/20">
+                                総合型選抜専門塾WILLアカデミー 代表
+                            </li>
+                            <li class="pl-4 border-l-4 border-matsuba/20">
+                                大阪工業大学工学部都市デザイン工学科<br>非常勤講師
+                            </li>
+                            <li class="pt-2 text-matsuba font-bold pl-4 border-l-4 border-matsuba">
+                                YouTube「山村チャンネル」運営
+                            </li>
+                            <li class="text-matsuba font-bold pl-4 border-l-4 border-matsuba">
+                                著書『なぜアンチがファンになるのか<br>〜敵すら味方にする無敵の対話道〜』<br>
+                                <span class="text-sm font-normal text-sumi/70">(Kindle)</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-1/2 w-[2px] h-32 bg-sumi/10 -translate-x-1/2"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-sumi text-wasahi/80 py-24 px-6 md:px-12 border-t border-wasahi/10">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-start gap-16">
+            
+            <!-- Left: Logo & Address -->
+            <div class="space-y-10 fade-element">
+                <h2 class="text-2xl tracking-widest text-wasahi font-bold">日本伝家元連合会</h2>
+                <div class="text-lg leading-loose tracking-widest font-medium opacity-90">
+                    <p>〒577-0054<br>大阪府東大阪市高井田元町1-4-21 201</p>
+                    <p class="mt-8 text-base opacity-60">※当会は会員の推薦・承認制の任意団体です。</p>
+                </div>
+            </div>
+
+            <!-- Right: Contact (Simple) -->
+            <div class="w-full md:w-auto fade-element">
+                <p class="text-lg tracking-widest mb-8 opacity-70 font-bold">お問い合わせ</p>
+                <div class="flex flex-col gap-4">
+                    <a href="mailto:hityamamura@gmail.com" class="text-lg tracking-widest font-bold border border-wasahi/30 py-6 px-16 hover:bg-wasahi hover:text-sumi transition-all duration-500 text-center bg-wasahi/5">
+                        メールでのお問い合わせ
+                    </a>
+                    <p class="text-base tracking-wide opacity-60 text-center mt-3 font-english">
+                        hityamamura@gmail.com
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container mx-auto mt-24 pt-8 border-t border-wasahi/10 flex justify-between items-end">
+            <p class="font-english text-sm opacity-50">&copy; Japan Federation of Iemoto.</p>
+            <div class="w-16 h-[2px] bg-wasahi/30"></div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Loading Animation
+            const loadingScreen = document.getElementById('loading');
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                loadingScreen.style.visibility = 'hidden';
+            }, 2500);
+
+            // Intersection Observer for Fade-in elements
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Play animation once
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-element');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
+
